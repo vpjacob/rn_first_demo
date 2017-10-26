@@ -10,7 +10,9 @@ import {
     ScrollView,
     Dimensions,
     ListView,
-
+    Alert,
+    TouchableHighlight,
+    StatusBar
 } from 'react-native';
 
 
@@ -42,13 +44,17 @@ export default class app extends Component {
     render (){
         return (
             <View style={styles.container}>
+                <StatusBar backgroundColor={'blue'} barStyle={'default'} networkActivityIndicatorVisible={true}>
+
+                </StatusBar>
                 <View style={styles.searchbar}>
                     <TextInput style={styles.input} placeholder='搜索商品'>
                     </TextInput>
-                    <Button style={styles.button} title='search'></Button>
+                    <Button style={styles.button} title='search' onPress={()=> Alert.alert('点击了搜索',null,null)}></Button>
                 </View>
                 <View style={styles.advertisingment}>
                     <ScrollView ref='scrollView' horizontal={true} pagingEnabled={true}>
+                        <TouchableHighlight onPress={()=>Alert.alert('点击了第一个轮播图')}>
                         <Text style={
                             {width:Dimensions.get('window').width,
                                 height:180,
@@ -56,21 +62,25 @@ export default class app extends Component {
                         }>
                             产品1
                         </Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight onPress={()=>Alert.alert('点击了第二个轮播图',null,null)}>
                         <Text style={
                             {width:Dimensions.get('window').width,
                                 height:180,
                                 backgroundColor:'red'}
                         }>
                             产品2
-                        </Text>
+                        </Text></TouchableHighlight>
+                        <TouchableHighlight onPress={()=>Alert.alert('点击了第三个轮播图',null,null)}>
                         <Text style={
                             {width:Dimensions.get('window').width,
                                 height:180,
                                 backgroundColor:'blue'}
                         }>
                             产品3
-                        </Text>
+                        </Text></TouchableHighlight>
                     </ScrollView>
+
                 </View>
                 <View style={styles.products}>
                     <ListView dataSource={this.state.dataSource} renderRow={this._renderRow}/>
@@ -81,11 +91,11 @@ export default class app extends Component {
 
     _renderRow(rowData, sectionID, rowID)  {
         return (
-
+<TouchableHighlight onPress={()=>Alert.alert('点击了商品列表',null,null)}>
                 <View style={styles.row}>
                     <Text>{rowData}</Text>
                 </View>
-
+</TouchableHighlight>
         );
     }
 
